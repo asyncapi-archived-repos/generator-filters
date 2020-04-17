@@ -1,0 +1,49 @@
+{
+  "name": "@asyncapi/generator-filters",
+  "version": "0.0.1",
+  "description": "Library with Nunjucks filters for templates using AsyncAPI Generator",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava",
+    "start": "node index.js",
+    "dev": "nodemon playground/index.js",
+    "docs": "jsdoc2md src/customFilters.js >> docs/api.md",
+    "lint": "eslint --config .eslintrc .",
+    "lint-fix": "eslint --fix --config .eslintrc ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asyncapi/generator-filters.git"
+  },
+  "keywords": [
+    "asyncapi",
+    "generator",
+    "nunjucks"
+  ],
+  "author": "Lukasz Gornicki <lpgornicki@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/asyncapi/generator-filters/issues"
+  },
+  "homepage": "https://github.com/asyncapi/generator-filters#readme",
+  "devDependencies": {
+    "@asyncapi/parser": "0.17.0",
+    "ava": "^3.7.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "express": "4.17.1",
+    "jsdoc-to-markdown": "^5.0.3",
+    "nodemon": "1.18.4",
+    "nunjucks": "3.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "markdown-it": "^10.0.0",
+    "openapi-sampler": "^1.0.0-beta.15"
+  },
+  "ava": {
+    "files": [
+      "./src/*.test.js"
+    ]
+  }
+}

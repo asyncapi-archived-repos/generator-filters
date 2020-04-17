@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+<body>
+<div class="container mx-auto px-4">
+    <p>
+        isArray => {{ asyncapi.channels() | isArray }}
+    </p>
+    <p>
+        isObject => {{ asyncapi.channels() | isObject }}
+    </p>
+    <p>
+        log => {{ asyncapi.info().title() | log }} <= yes, empty as it is console.log to the server logs
+    </p>
+    <p>
+        markdown2html => {{ asyncapi.info().description() | markdown2html }}
+    </p>
+    <p>
+        loadash isString => {{ asyncapi.info().description() | isString }}
+    </p>
+</div>
+</body>
+</html>
