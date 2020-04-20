@@ -42,7 +42,7 @@ filter.log = log;
 
 /**
  * Extracts example from the message payload
- * @msg {object} - Message
+ * @msg {object} - Parser Message function
  * @returns {object}
  */
 function getPayloadExamples(msg) {
@@ -59,7 +59,7 @@ filter.getPayloadExamples = getPayloadExamples;
 
 /**
  * Extracts example from the message header
- * @msg {object} - Message
+ * @msg {object} - Parser Message function
  * @returns {object}
  */
 function getHeadersExamples(msg) {
