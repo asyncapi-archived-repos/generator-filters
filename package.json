@@ -5,8 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "test": "ava",
-    "start": "node index.js",
-    "dev": "nodemon playground/index.js",
     "docs": "jsdoc2md src/customFilters.js >> docs/api.md",
     "lint": "eslint --config .eslintrc .",
     "lint-fix": "eslint --fix --config .eslintrc ."
@@ -27,14 +25,10 @@
   },
   "homepage": "https://github.com/asyncapi/generator-filters#readme",
   "devDependencies": {
-    "@asyncapi/parser": "0.17.0",
     "ava": "^3.7.0",
     "eslint": "^6.8.0",
     "eslint-plugin-sonarjs": "^0.5.0",
-    "express": "4.17.1",
-    "jsdoc-to-markdown": "^5.0.3",
-    "nodemon": "1.18.4",
-    "nunjucks": "3.2.0"
+    "jsdoc-to-markdown": "^5.0.3"
   },
   "dependencies": {
     "lodash": "^4.17.15",
