@@ -5,23 +5,6 @@ const OpenAPISampler = require('openapi-sampler');
 const filter = module.exports;
 
 /**
-Filters that go away by adding loadash:
-
-split
-isArray
-isObject
-firstKey -> head
-contains -> includes
-*/
-
-/* html-template only
-isExpandable
-containTags
-containNoTag
-nonParserExtensions
-*/
-
-/**
  * Turns Markdown into HTML
  * @md {string} - String with valid Markdown syntax
  * @returns {string} HTML string
