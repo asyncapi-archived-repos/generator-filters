@@ -19,6 +19,12 @@
 <dt><a href="#generateExample">generateExample()</a> ⇒ <code>string</code></dt>
 <dd><p>Generate string with example from provided schema</p>
 </dd>
+<dt><a href="#oneLine">oneLine()</a> ⇒ <code>string</code></dt>
+<dd><p>Turns multiline string into one liner</p>
+</dd>
+<dt><a href="#docline">docline()</a> ⇒ <code>string</code></dt>
+<dd><p>Generate JSDoc from message properties of the header and the payload</p>
+</dd>
 </dl>
 
 <a name="markdown2html"></a>
@@ -64,3 +70,37 @@ Generate string with example from provided schema
 
 **Kind**: global function  
 **Msg**: <code>object</code> - A OpenAPI Schema Object  
+<a name="oneLine"></a>
+
+## oneLine() ⇒ <code>string</code>
+Turns multiline string into one liner
+
+**Kind**: global function  
+**Str**: <code>string</code> - Any multiline string  
+<a name="docline"></a>
+
+## docline() ⇒ <code>string</code>
+Generate JSDoc from message properties of the header and the payload
+
+**Kind**: global function  
+**Returns**: <code>string</code> - JSDoc compatible entry  
+**Field**: <code>object</code> - Property object  
+**Fieldname**: <code>string</code> - Name of documented property  
+**Scopepropname**: <code>string</code> - Name of param for JSDocs  
+**Example**  
+```js
+docline(
+ Schema {
+    _json: {
+      type: 'integer',
+      minimum: 0,
+      maximum: 100,
+      'x-parser-schema-id': '<anonymous-schema-3>'
+    }
+  },
+  my-app-header,
+  options.message.headers
+)
+
+Returned value will be ->  * @param {integer} options.message.headers.my-app-header
+```

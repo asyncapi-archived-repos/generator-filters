@@ -75,3 +75,70 @@ function generateExample(schema) {
   return JSON.stringify(OpenAPISampler.sample(schema) || '', null, 2);
 };
 filter.generateExample = generateExample;
+
+/**
+ * Turns multiline string into one liner
+ * @str {string} - Any multiline string
+ * @returns {string}
+ */
+function oneLine(str) {
+  if (!str) return str;
+  return str.replace(/\n/g, ' ');
+};
+filter.oneLine = oneLine;
+
+/**
+ * Generate JSDoc from message properties of the header and the payload
+ * 
+ * @example
+ * docline(
+ *  Schema {
+ *     _json: {
+ *       type: 'integer',
+ *       minimum: 0,
+ *       maximum: 100,
+ *       'x-parser-schema-id': '<anonymous-schema-3>'
+ *     }
+ *   },
+ *   my-app-header,
+ *   options.message.headers
+ * )
+ * 
+ * Returned value will be ->  * @param {integer} options.message.headers.my-app-header
+ * 
+ * @field {object} - Property object
+ * @fieldName {string} - Name of documented property
+ * @scopePropName {string} - Name of param for JSDocs
+ * @returns {string} JSDoc compatible entry
+ */
+function docline(field, fieldName, scopePropName) {
+  const buildLine = (f, fName, pName) => {
+    const type = f.type() ? f.type() : 'string';
+    const description = f.description() ? ` - ${f.description().replace(/\r?\n|\r/g, '')}` : '';
+    let def = f.default();
+
+    if (def && type === 'string') def = `'${def}'`;
+
+    let line;
+    if (def !== undefined) {
+      line = ` * @param {${type}} [${pName ? `${pName}.` : ''}${fName}=${def}]`;
+    } else {
+      line = ` * @param {${type}} ${pName ? `${pName}.` : ''}${fName}`;
+    }
+
+    if (type === 'object') {
+      let lines = `${line}\n`;
+      let first = true;
+      for (const propName in f.properties()) {
+        lines = `${lines}${first ? '' : '\n'}${buildLine(f.properties()[propName], propName, `${pName ? `${pName}.` : ''}${fName}`)}`;
+        first = false;
+      }
+      return lines;
+    }
+
+    return `${line}${description}`;
+  };
+
+  return buildLine(field, fieldName, scopePropName);
+};
+filter.docline = docline;
