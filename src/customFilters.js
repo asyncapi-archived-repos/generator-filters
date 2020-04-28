@@ -15,13 +15,22 @@ function markdown2html(md) {
 filter.markdown2html = markdown2html;
 
 /**
- * Logs input to server logs
+ * Logs input to server logs to stdout
  * @str  {string} Info that is logged
  */
 function log(str) {
   console.log(str);
 }
 filter.log = log;
+
+/**
+ * Logs input to server as error to stderr
+ * @str  {string} Info that is logged
+ */
+function logError(str) {
+  console.error(str);
+}
+filter.logError = logError;
 
 /**
  * Extracts example from the message payload

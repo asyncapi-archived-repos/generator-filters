@@ -5,7 +5,10 @@
 <dd><p>Turns Markdown into HTML</p>
 </dd>
 <dt><a href="#log">log()</a></dt>
-<dd><p>Logs input to server logs</p>
+<dd><p>Logs input to server logs to stdout</p>
+</dd>
+<dt><a href="#logError">logError()</a></dt>
+<dd><p>Logs input to server as error to stderr</p>
 </dd>
 <dt><a href="#getPayloadExamples">getPayloadExamples()</a> ⇒ <code>object</code></dt>
 <dd><p>Extracts example from the message payload</p>
@@ -29,7 +32,14 @@ Turns Markdown into HTML
 <a name="log"></a>
 
 ## log()
-Logs input to server logs
+Logs input to server logs to stdout
+
+**Kind**: global function  
+**Str**: <code>string</code> Info that is logged  
+<a name="logError"></a>
+
+## logError()
+Logs input to server as error to stderr
 
 **Kind**: global function  
 **Str**: <code>string</code> Info that is logged  
@@ -39,14 +49,14 @@ Logs input to server logs
 Extracts example from the message payload
 
 **Kind**: global function  
-**Msg**: <code>object</code> - Message  
+**Msg**: <code>object</code> - Parser Message function  
 <a name="getHeadersExamples"></a>
 
 ## getHeadersExamples() ⇒ <code>object</code>
 Extracts example from the message header
 
 **Kind**: global function  
-**Msg**: <code>object</code> - Message  
+**Msg**: <code>object</code> - Parser Message function  
 <a name="generateExample"></a>
 
 ## generateExample() ⇒ <code>string</code>
