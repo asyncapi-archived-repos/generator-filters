@@ -1,6 +1,6 @@
 {
   "name": "@asyncapi/generator-filters",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Library with Nunjucks filters for templates using AsyncAPI Generator",
   "main": "src/index.js",
   "scripts": {
@@ -24,6 +24,9 @@
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/asyncapi/generator-filters/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "homepage": "https://github.com/asyncapi/generator-filters#readme",
   "devDependencies": {
