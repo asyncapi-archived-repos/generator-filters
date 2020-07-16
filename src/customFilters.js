@@ -71,8 +71,8 @@ filter.getHeadersExamples = getHeadersExamples;
  * @msg {object} - A OpenAPI Schema Object
  * @returns {string}
  */
-function generateExample(schema) {
-  return JSON.stringify(OpenAPISampler.sample(schema) || '', null, 2);
+function generateExample(schema, asyncapi) {
+  return JSON.stringify(OpenAPISampler.sample(schema, asyncapi) || '', null, 2);
 };
 filter.generateExample = generateExample;
 
