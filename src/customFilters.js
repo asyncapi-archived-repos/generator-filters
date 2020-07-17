@@ -68,11 +68,12 @@ filter.getHeadersExamples = getHeadersExamples;
 
 /**
  * Generate string with example from provided schema
- * @msg {object} - A OpenAPI Schema Object
+ * @schema {object} - Schema Object
+ * @asyncapi {object} - Whole AsyncAPI object used for handling circular refs
  * @returns {string}
  */
 function generateExample(schema, asyncapi) {
-  return JSON.stringify(OpenAPISampler.sample(schema, asyncapi) || '', null, 2);
+  return JSON.stringify(OpenAPISampler.sample(schema, {}, asyncapi) || '', null, 2);
 };
 filter.generateExample = generateExample;
 
