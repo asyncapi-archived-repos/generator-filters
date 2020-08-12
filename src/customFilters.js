@@ -69,11 +69,11 @@ filter.getHeadersExamples = getHeadersExamples;
 /**
  * Generate string with example from provided schema
  * @schema {object} - Schema Object
- * @asyncapi {object} - Whole AsyncAPI object used for handling circular refs
+ * @schema {object} - Options object. Supported options are listed here https://github.com/Redocly/openapi-sampler#usage
  * @returns {string}
  */
-function generateExample(schema, asyncapi) {
-  return JSON.stringify(OpenAPISampler.sample(schema, {}, asyncapi) || '', null, 2);
+function generateExample(schema, options) {
+  return JSON.stringify(OpenAPISampler.sample(schema, options || {}) || '', null, 2);
 };
 filter.generateExample = generateExample;
 
