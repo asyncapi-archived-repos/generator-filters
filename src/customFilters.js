@@ -69,7 +69,7 @@ filter.getHeadersExamples = getHeadersExamples;
 /**
  * Generate string with example from provided schema
  * @schema {object} - Schema object as JSON and not Schema model map
- * @schema {object} - Options object. Supported options are listed here https://github.com/Redocly/openapi-sampler#usage
+ * @options {object} - Options object. Supported options are listed here https://github.com/Redocly/openapi-sampler#usage
  * @returns {string}
  */
 function generateExample(schema, options) {
