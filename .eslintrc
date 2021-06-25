@@ -93,3 +93,8 @@ rules:
   prefer-const: 2
   prefer-spread: 2
   prefer-template: 2
+
+overrides:
+- files: "**/*.test.js"
+  rules:
+    sonarjs/no-duplicate-string: 0
