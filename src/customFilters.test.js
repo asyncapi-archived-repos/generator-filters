@@ -2,6 +2,9 @@ const test = require('ava');
 const { markdown2html, generateExample, getPayloadExamples, getHeadersExamples, oneLine } = require('./customFilters');
 const Message = require('@asyncapi/parser/lib/models/message');
 
+const exampleName = 'example name';
+const exampleSummary = 'example summary';
+
 test('markdown2html returns valid html', t => {
   const is = t.is;
   const value =  markdown2html('**test**');
@@ -32,13 +35,13 @@ test('.getPayloadExamples() should return epmty examples', t => {
     new Message({
       examples: [
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           headers: { foo: 'bar' },
         },
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           headers: { bar: 'foo' },
         },
       ],
@@ -52,13 +55,13 @@ test('.getPayloadExamples() should return payload examples', t => {
     new Message({
       examples: [
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           payload: { foo: 'bar' },
         },
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           payload: { bar: 'foo' },
         },
       ],
@@ -66,13 +69,13 @@ test('.getPayloadExamples() should return payload examples', t => {
   );
   t.deepEqual(result, [
     {
-      name: 'example name',
-      summary: 'example summary',
+      name: exampleName,
+      summary: exampleSummary,
       example: { foo: 'bar' },
     },
     {
-      name: 'example name',
-      summary: 'example summary',
+      name: exampleName,
+      summary: exampleSummary,
       example: { bar: 'foo' },
     },
   ]);
@@ -104,13 +107,13 @@ test('.getPayloadExamples() should return examples from payload schema - case wh
       },
       examples: [
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           headers: { foo: 'bar' },
         },
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           headers: { bar: 'foo' },
         },
       ],
@@ -131,13 +134,13 @@ test('.getHeadersExamples() should return epmty examples', t => {
     new Message({
       examples: [
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           payload: { foo: 'bar' },
         },
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           payload: { bar: 'foo' },
         },
       ],
@@ -151,13 +154,13 @@ test('.getHeadersExamples() should return headers examples', t => {
     new Message({
       examples: [
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           headers: { foo: 'bar' },
         },
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           headers: { bar: 'foo' },
         },
       ],
@@ -165,13 +168,13 @@ test('.getHeadersExamples() should return headers examples', t => {
   );
   t.deepEqual(result, [
     {
-      name: 'example name',
-      summary: 'example summary',
+      name: exampleName,
+      summary: exampleSummary,
       example: { foo: 'bar' },
     },
     {
-      name: 'example name',
-      summary: 'example summary',
+      name: exampleName,
+      summary: exampleSummary,
       example: { bar: 'foo' },
     },
   ]);
@@ -203,13 +206,13 @@ test('.getHeadersExamples() should return examples from headers schema - case wh
       },
       examples: [
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           payload: { foo: 'bar' },
         },
         {
-          name: 'example name',
-          summary: 'example summary',
+          name: exampleName,
+          summary: exampleSummary,
           payload: { bar: 'foo' },
         },
       ],
