@@ -30,7 +30,7 @@ multiline`);
   is(value, expected);
 });
 
-test('.getPayloadExamples() should return epmty examples', t => {
+test('.getPayloadExamples() should return empty examples', t => {
   const result = getPayloadExamples(
     new Message({
       examples: [
@@ -99,7 +99,7 @@ test('.getPayloadExamples() should return examples from payload schema', t => {
   ]);
 });
 
-test('.getPayloadExamples() should return examples from payload schema - case when headers examples are defined in `examples` field', t => {
+test('.getPayloadExamples() should return examples from payload schema - case when only headers examples are defined in `examples` field', t => {
   const result = getPayloadExamples(
     new Message({
       payload: {
@@ -129,7 +129,36 @@ test('.getPayloadExamples() should return examples from payload schema - case wh
   ]);
 });
 
-test('.getHeadersExamples() should return epmty examples', t => {
+test('.getPayloadExamples() should return examples for payload - case when at least one item in `examples` array has `payload` field with existing `payload.examples`', t => {
+  const result = getPayloadExamples(
+    new Message({
+      payload: {
+        examples: [{ foo: 'bar' }, { bar: 'foo' }],
+      },
+      examples: [
+        {
+          name: exampleName,
+          summary: exampleSummary,
+          headers: { foo: 'bar' },
+        },
+        {
+          name: exampleName,
+          summary: exampleSummary,
+          payload: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      name: exampleName,
+      summary: exampleSummary,
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getHeadersExamples() should return empty examples', t => {
   const result = getHeadersExamples(
     new Message({
       examples: [
@@ -198,7 +227,7 @@ test('.getHeadersExamples() should return examples from headers schema', t => {
   ]);
 });
 
-test('.getHeadersExamples() should return examples from headers schema - case when payload examples are defined in `examples` field', t => {
+test('.getHeadersExamples() should return examples from headers schema - case when only payload examples are defined in `examples` field', t => {
   const result = getHeadersExamples(
     new Message({
       headers: {
@@ -223,6 +252,35 @@ test('.getHeadersExamples() should return examples from headers schema - case wh
       example: { foo: 'bar' },
     },
     {
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getHeadersExamples() should return examples for headers - case when at least one item in `examples` array has `headers` field with existing `headers.examples`', t => {
+  const result = getHeadersExamples(
+    new Message({
+      headers: {
+        examples: [{ foo: 'bar' }, { bar: 'foo' }],
+      },
+      examples: [
+        {
+          name: exampleName,
+          summary: exampleSummary,
+          payload: { foo: 'bar' },
+        },
+        {
+          name: exampleName,
+          summary: exampleSummary,
+          headers: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      name: exampleName,
+      summary: exampleSummary,
       example: { bar: 'foo' },
     },
   ]);
