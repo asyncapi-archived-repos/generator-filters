@@ -61,8 +61,6 @@ function getPayloadExamples(msg) {
   if (payload && payload.examples()) {
     return payload.examples().map(example => ({ example }));
   }
-
-  return;
 }
 filter.getPayloadExamples = getPayloadExamples;
 
@@ -95,8 +93,6 @@ function getHeadersExamples(msg) {
   if (headers && headers.examples()) {
     return headers.examples().map(example => ({ example }));
   }
-
-  return;
 }
 filter.getHeadersExamples = getHeadersExamples;
 
