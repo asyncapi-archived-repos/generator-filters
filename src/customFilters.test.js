@@ -1,5 +1,6 @@
 const test = require('ava');
-const {markdown2html, generateExample, oneLine} = require('./customFilters');
+const { markdown2html, generateExample, getPayloadExamples, getHeadersExamples, oneLine } = require('./customFilters');
+const Message = require('@asyncapi/parser/lib/models/message');
 
 test('markdown2html returns valid html', t => {
   const is = t.is;
@@ -24,4 +25,202 @@ multiline`);
   const expected = 'This is multiline';
   
   is(value, expected);
+});
+
+test('.getPayloadExamples() should return epmty examples', t => {
+  const result = getPayloadExamples(
+    new Message({
+      examples: [
+        {
+          name: 'example name',
+          summary: 'example summary',
+          headers: { foo: 'bar' },
+        },
+        {
+          name: 'example name',
+          summary: 'example summary',
+          headers: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.is(result, undefined);
+});
+
+test('.getPayloadExamples() should return payload examples', t => {
+  const result = getPayloadExamples(
+    new Message({
+      examples: [
+        {
+          name: 'example name',
+          summary: 'example summary',
+          payload: { foo: 'bar' },
+        },
+        {
+          name: 'example name',
+          summary: 'example summary',
+          payload: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      name: 'example name',
+      summary: 'example summary',
+      example: { foo: 'bar' },
+    },
+    {
+      name: 'example name',
+      summary: 'example summary',
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getPayloadExamples() should return examples from payload schema', t => {
+  const result = getPayloadExamples(
+    new Message({
+      payload: {
+        examples: [{ foo: 'bar' }, { bar: 'foo' }],
+      },
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      example: { foo: 'bar' },
+    },
+    {
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getPayloadExamples() should return examples from payload schema - case when headers examples are defined in `examples` field', t => {
+  const result = getPayloadExamples(
+    new Message({
+      payload: {
+        examples: [{ foo: 'bar' }, { bar: 'foo' }],
+      },
+      examples: [
+        {
+          name: 'example name',
+          summary: 'example summary',
+          headers: { foo: 'bar' },
+        },
+        {
+          name: 'example name',
+          summary: 'example summary',
+          headers: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      example: { foo: 'bar' },
+    },
+    {
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getHeadersExamples() should return epmty examples', t => {
+  const result = getHeadersExamples(
+    new Message({
+      examples: [
+        {
+          name: 'example name',
+          summary: 'example summary',
+          payload: { foo: 'bar' },
+        },
+        {
+          name: 'example name',
+          summary: 'example summary',
+          payload: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.is(result, undefined);
+});
+
+test('.getHeadersExamples() should return headers examples', t => {
+  const result = getHeadersExamples(
+    new Message({
+      examples: [
+        {
+          name: 'example name',
+          summary: 'example summary',
+          headers: { foo: 'bar' },
+        },
+        {
+          name: 'example name',
+          summary: 'example summary',
+          headers: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      name: 'example name',
+      summary: 'example summary',
+      example: { foo: 'bar' },
+    },
+    {
+      name: 'example name',
+      summary: 'example summary',
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getHeadersExamples() should return examples from headers schema', t => {
+  const result = getHeadersExamples(
+    new Message({
+      headers: {
+        examples: [{ foo: 'bar' }, { bar: 'foo' }],
+      },
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      example: { foo: 'bar' },
+    },
+    {
+      example: { bar: 'foo' },
+    },
+  ]);
+});
+
+test('.getHeadersExamples() should return examples from headers schema - case when payload examples are defined in `examples` field', t => {
+  const result = getHeadersExamples(
+    new Message({
+      headers: {
+        examples: [{ foo: 'bar' }, { bar: 'foo' }],
+      },
+      examples: [
+        {
+          name: 'example name',
+          summary: 'example summary',
+          payload: { foo: 'bar' },
+        },
+        {
+          name: 'example name',
+          summary: 'example summary',
+          payload: { bar: 'foo' },
+        },
+      ],
+    }),
+  );
+  t.deepEqual(result, [
+    {
+      example: { foo: 'bar' },
+    },
+    {
+      example: { bar: 'foo' },
+    },
+  ]);
 });
