@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 const test = require('ava');
 const { markdown2html, generateExample, getPayloadExamples, getHeadersExamples, oneLine } = require('./customFilters');
 const Message = require('@asyncapi/parser/lib/models/message');
