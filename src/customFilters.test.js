@@ -5,6 +5,21 @@ const Message = require('@asyncapi/parser/lib/models/message');
 const exampleName = 'example name';
 const exampleSummary = 'example summary';
 
+function messageExampleMock(firstType = 'payload', secondType = 'payload') {
+  return [
+    {
+      name: exampleName,
+      summary: exampleSummary,
+      [firstType]: { foo: 'bar' },
+    },
+    {
+      name: exampleName,
+      summary: exampleSummary,
+      [secondType]: { bar: 'foo' },
+    },
+  ];
+}
+
 test('markdown2html returns valid html', t => {
   const is = t.is;
   const value =  markdown2html('**test**');
@@ -33,18 +48,7 @@ multiline`);
 test('.getPayloadExamples() should return empty examples', t => {
   const result = getPayloadExamples(
     new Message({
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('headers', 'headers'),
     }),
   );
   t.is(result, undefined);
@@ -53,32 +57,10 @@ test('.getPayloadExamples() should return empty examples', t => {
 test('.getPayloadExamples() should return payload examples', t => {
   const result = getPayloadExamples(
     new Message({
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('payload', 'payload'),
     }),
   );
-  t.deepEqual(result, [
-    {
-      name: exampleName,
-      summary: exampleSummary,
-      example: { foo: 'bar' },
-    },
-    {
-      name: exampleName,
-      summary: exampleSummary,
-      example: { bar: 'foo' },
-    },
-  ]);
+  t.deepEqual(result, messageExampleMock('example', 'example'));
 });
 
 test('.getPayloadExamples() should return examples from payload schema', t => {
@@ -105,18 +87,7 @@ test('.getPayloadExamples() should return examples from payload schema - case wh
       payload: {
         examples: [{ foo: 'bar' }, { bar: 'foo' }],
       },
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('headers', 'headers'),
     }),
   );
   t.deepEqual(result, [
@@ -135,18 +106,7 @@ test('.getPayloadExamples() should return examples for payload - case when at le
       payload: {
         examples: [{ foo: 'bar' }, { bar: 'foo' }],
       },
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('headers', 'payload'),
     }),
   );
   t.deepEqual(result, [
@@ -161,18 +121,7 @@ test('.getPayloadExamples() should return examples for payload - case when at le
 test('.getHeadersExamples() should return empty examples', t => {
   const result = getHeadersExamples(
     new Message({
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('payload', 'payload'),
     }),
   );
   t.is(result, undefined);
@@ -181,32 +130,10 @@ test('.getHeadersExamples() should return empty examples', t => {
 test('.getHeadersExamples() should return headers examples', t => {
   const result = getHeadersExamples(
     new Message({
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('headers', 'headers'),
     }),
   );
-  t.deepEqual(result, [
-    {
-      name: exampleName,
-      summary: exampleSummary,
-      example: { foo: 'bar' },
-    },
-    {
-      name: exampleName,
-      summary: exampleSummary,
-      example: { bar: 'foo' },
-    },
-  ]);
+  t.deepEqual(result, messageExampleMock('example', 'example'));
 });
 
 test('.getHeadersExamples() should return examples from headers schema', t => {
@@ -233,18 +160,7 @@ test('.getHeadersExamples() should return examples from headers schema - case wh
       headers: {
         examples: [{ foo: 'bar' }, { bar: 'foo' }],
       },
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('payload', 'payload'),
     }),
   );
   t.deepEqual(result, [
@@ -263,18 +179,7 @@ test('.getHeadersExamples() should return examples for headers - case when at le
       headers: {
         examples: [{ foo: 'bar' }, { bar: 'foo' }],
       },
-      examples: [
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          payload: { foo: 'bar' },
-        },
-        {
-          name: exampleName,
-          summary: exampleSummary,
-          headers: { bar: 'foo' },
-        },
-      ],
+      examples: messageExampleMock('payload', 'headers'),
     }),
   );
   t.deepEqual(result, [
