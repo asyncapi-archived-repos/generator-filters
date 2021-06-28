@@ -95,6 +95,7 @@ rules:
   prefer-template: 2
 
 overrides:
-- files: "src/customFilters.test.js"
-  rules:
-    sonarjs/no-duplicate-string: 0
+  - files:
+      - "src/customFilters.test.js"
+     rules:
+      sonarjs/no-duplicate-string: 0
