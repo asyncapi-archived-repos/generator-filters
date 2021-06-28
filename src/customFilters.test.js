@@ -1,4 +1,3 @@
-// NOSONAR
 const test = require('ava');
 const { markdown2html, generateExample, getPayloadExamples, getHeadersExamples, oneLine } = require('./customFilters');
 const Message = require('@asyncapi/parser/lib/models/message');
@@ -31,7 +30,7 @@ multiline`);
   is(value, expected);
 });
 
-test('.getPayloadExamples() should return empty examples', t => {
+test('.getPayloadExamples() should return empty examples', t => { // NOSONAR
   const result = getPayloadExamples(
     new Message({
       examples: [
