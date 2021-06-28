@@ -30,7 +30,7 @@ multiline`);
   is(value, expected);
 });
 
-test('.getPayloadExamples() should return empty examples', t => { // NOSONAR
+test('.getPayloadExamples() should return empty examples', t => {
   const result = getPayloadExamples(
     new Message({
       examples: [

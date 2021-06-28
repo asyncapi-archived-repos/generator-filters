@@ -97,5 +97,5 @@ rules:
 overrides:
   - files:
       - "src/customFilters.test.js"
-     rules:
+    rules:
       sonarjs/no-duplicate-string: 0
