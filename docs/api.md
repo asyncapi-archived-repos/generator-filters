@@ -114,4 +114,4 @@ Helper function to replace server variables in the URL
 **Kind**: Global function  
 **Returns**: <code>string</code> - URL string with replaced variable values  
 **url**: <code>string</code> - Input URL with variables  
-**serverVariables**: <code>Object</code> - Varibles model map 
+**serverVariables**: <code>Object</code> - Varibles model map
