@@ -190,3 +190,13 @@ test('.getHeadersExamples() should return examples for headers - case when at le
     },
   ]);
 });
+
+test('.replaceServerVariablesWithValues() should replace variable from placeholder string', t => {
+  const is = t.is;
+  const inputUrl = 'localhost:{port}'; 
+  const serverVariables = JSON.parse('{"port":{"_json":{"default":"9092"}}}'); 
+  const expected = 'localhost:9092';
+  const value    = replaceServerVariablesWithValues(inputUrl, serverVariables)
+  
+  is(value, expected);
+});
