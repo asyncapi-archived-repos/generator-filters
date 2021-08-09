@@ -195,7 +195,8 @@ test('.getHeadersExamples() should return examples for headers - case when at le
 test('.replaceServerVariablesWithValues() should replace placeholder with default value', t => {
   const is = t.is;
   const inputUrl = 'localhost:{port}'; 
-  const serverVariables = new ServerVariable({port: { default:"9092", enum: ["8080","8883"]}}); 
+  const serverVariables = { port: new ServerVariable({ default:"9092", enum: ["8080","8883"] }) }; 
+  console.info(JSON.stringify(serverVariables))
   const expected = 'localhost:9092';
   const value    = replaceServerVariablesWithValues(inputUrl, serverVariables)
   
@@ -205,7 +206,7 @@ test('.replaceServerVariablesWithValues() should replace placeholder with defaul
 test('.replaceServerVariablesWithValues() should replace placeholder with first enum value when no default is specified', t => {
   const is = t.is;
   const inputUrl = 'localhost:{port}'; 
-  const serverVariables = new ServerVariable({ port: { enum: ["8080","8883"] } }); 
+  const serverVariables = { port: new ServerVariable({ enum: ["8080","8883"] }) }; 
   const expected = 'localhost:8080';
   const value    = replaceServerVariablesWithValues(inputUrl, serverVariables)
   
