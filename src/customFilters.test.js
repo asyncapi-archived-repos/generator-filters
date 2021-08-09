@@ -1,5 +1,5 @@
 const test = require('ava');
-const { markdown2html, generateExample, getPayloadExamples, getHeadersExamples, oneLine } = require('./customFilters');
+const { markdown2html, generateExample, getPayloadExamples, getHeadersExamples, oneLine, replaceServerVariablesWithValues } = require('./customFilters');
 const Message = require('@asyncapi/parser/lib/models/message');
 
 const exampleName = 'example name';
