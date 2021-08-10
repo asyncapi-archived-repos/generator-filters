@@ -183,7 +183,8 @@ filter.docline = docline;
 */
 function replaceServerVariablesWithValues(url, serverVariables) {
   const getVariablesNamesFromUrl = (inputUrl) => {
-    const result = [], array;
+    const result = [];
+    let array = [];
 
     const regEx = /{([^}]+)}/g;
 
