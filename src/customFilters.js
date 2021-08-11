@@ -178,7 +178,7 @@ filter.docline = docline;
 /**
  * Helper function to replace server variables in the url with actual values
  * @url {string} - url string
- * @serverserverVariables {Object} - Varibles model map
+ * @serverserverVariables {Object} - Variables model map
  * @returns {string} 
  */
 function replaceServerVariablesWithValues(url, serverVariables) {
