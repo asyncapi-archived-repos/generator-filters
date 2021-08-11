@@ -115,4 +115,4 @@ Helper function to replace server variables in the url with actual values
 
 **Kind**: global function  
 **Url**: <code>string</code> - url string  
-**Serverservervariables**: <code>Object</code> - Varibles model map  
+**Serverservervariables**: <code>Object</code> - Variables model map  
